@@ -1,0 +1,13 @@
+.whitespace-pre {
+    white-space: pre;
+}
+
+.fixed-table-layout {
+    table.mat-table {
+        table-layout: fixed;
+
+        td {
+            word-wrap: break-word;
+        }
+    }
+}
