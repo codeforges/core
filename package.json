@@ -22,7 +22,11 @@
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
     "@nebular/auth": "^4.0.0",
+    "@nestjsx/crud-request": "^4.0.1",
+    "@nestjsx/util": "^4.0.1",
+    "@types/lodash": "^4.14.134",
     "bootstrap": "^4.3.1",
+    "lodash": "^4.17.11",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

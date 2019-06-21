@@ -1,7 +1,7 @@
 import {Route} from '@angular/router';
 import {ThingListComponent} from './list/ThingListComponent';
 
-export const ThingRouting: Route[] = [
+export const ThingManagerRouting: Route[] = [
     {
         path: '', children: [
             {path: 'list', component: ThingListComponent},

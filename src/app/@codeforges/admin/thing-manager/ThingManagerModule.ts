@@ -3,7 +3,7 @@ import {ThingListComponent} from './list/ThingListComponent';
 import {GeneralPageModule} from '../common/pages/general/GeneralPageModule';
 import {MaterialModules} from '../../core/material/MaterialModules';
 import {RouterModule} from '@angular/router';
-import {ThingRouting} from './ThingRouting';
+import {ThingManagerRouting} from './ThingManagerRouting';
 
 const components = [
     ThingListComponent
@@ -11,7 +11,7 @@ const components = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(ThingRouting),
+        RouterModule.forChild(ThingManagerRouting),
         MaterialModules,
         GeneralPageModule
     ],
@@ -19,5 +19,5 @@ const components = [
     declarations: components,
     providers: [],
 })
-export class ThingModule {
+export class ThingManagerModule {
 }

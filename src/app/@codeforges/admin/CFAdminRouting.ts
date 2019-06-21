@@ -8,7 +8,7 @@ export const CFAdminRouting: Route[] = [
                 path: 'admin',
                 component: CFAdminComponent,
                 children: [
-                    {path: 'things', loadChildren: './thing/ThingModule#ThingModule'}
+                    {path: 'things', loadChildren: './thing-manager/ThingManagerModule#ThingManagerModule'}
                 ]
             },
             {path: '', redirectTo: 'admin'}
