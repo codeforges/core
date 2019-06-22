@@ -9,6 +9,10 @@
         </div>
     </div>
 </cf-general-page>
-<button mat-fab aria-label="Create Thing" matTooltip="Create thing" class="fab-fixed">
+<button mat-fab
+        aria-label="Create Thing"
+        (click)="openCreateDialog()"
+        matTooltip="Create thing"
+        class="fab-fixed">
     <mat-icon>add</mat-icon>
 </button>

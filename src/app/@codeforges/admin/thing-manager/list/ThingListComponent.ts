@@ -3,6 +3,8 @@ import {GeneralTableColumn} from '../../../core/material/tables/dataModels/Gener
 import {ThingService} from '../../common/api/thing/services/ThingService';
 import {Observable} from 'rxjs';
 import {Thing} from '../../common/api/thing/dto/Thing';
+import {MatDialog} from '@angular/material';
+import {CreateThingDialogComponent} from '../dialogs/CreateThingDialogComponent';
 
 @Component({
     selector: 'cf-thing-list',
@@ -18,10 +20,18 @@ export class ThingListComponent implements OnInit {
         {columnKey: 'type', columnName: 'Type'},
     ];
 
-    constructor(private readonly thingService: ThingService) {
+    constructor(private readonly thingService: ThingService,
+                private readonly matDialog: MatDialog) {
     }
 
     ngOnInit() {
         this.thingsStream = this.thingService.getMany();
+    }
+
+    public openCreateDialog() {
+        const ref = this.matDialog.open(CreateThingDialogComponent, {
+            height: '30vh',
+            width: '30vw',
+        });
     }
 }

@@ -6,9 +6,12 @@ import {RouterModule} from '@angular/router';
 import {ThingManagerRouting} from './ThingManagerRouting';
 import {ListTableModule} from '../../core/material/tables/listTable/ListTableModule';
 import {CommonModule} from '@angular/common';
+import {CreateThingDialogComponent} from './dialogs/CreateThingDialogComponent';
+import {ReactiveFormsModule} from '@angular/forms';
 
 const components = [
-    ThingListComponent
+    ThingListComponent,
+    CreateThingDialogComponent
 ];
 
 @NgModule({
@@ -17,9 +20,13 @@ const components = [
         RouterModule.forChild(ThingManagerRouting),
         MaterialModules,
         ListTableModule,
-        GeneralPageModule
+        GeneralPageModule,
+        ReactiveFormsModule
     ],
     exports: [],
+    entryComponents: [
+        CreateThingDialogComponent,
+    ],
     declarations: components,
     providers: [],
 })
