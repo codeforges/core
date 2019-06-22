@@ -4,7 +4,7 @@ import {GeneralTableColumn} from '../dataModels/GeneralTableColumn';
 import * as _ from 'lodash';
 
 @Component({
-    selector: 'app-list-table',
+    selector: 'cf-list-table',
     templateUrl: 'listTable.html',
     styleUrls: ['listTable.scss'],
     encapsulation: ViewEncapsulation.None
@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 
 export class ListTableComponent extends DataTableComponent implements OnInit, AfterViewInit {
     @ContentChild(TemplateRef, { static: false }) actionMenuTemplate: TemplateRef<any>;
-    @Input() hasScroll: boolean;
+    @Input() hasScroll = false;
     @Input() sortDirection = '';
     @Input() isSticky = false;
     @Input() columnSuffixTemplate: TemplateRef<any>;

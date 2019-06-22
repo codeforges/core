@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AdminApiConfig} from '../../AdminApiConfig';
-import {CrudResource} from '../../crud/CrudResource';
+import {CrudResource} from '../../../../../nestjsx/crud/CrudResource';
 import {HttpClient} from '@angular/common/http';
 import {Thing} from '../dto/Thing';
 

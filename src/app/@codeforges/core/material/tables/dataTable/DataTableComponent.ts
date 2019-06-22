@@ -20,7 +20,7 @@ import * as _ from 'lodash';
 
 @Component({
     styleUrls: ['DataTable.scss'],
-    selector: 'app-data-table',
+    selector: 'cf-data-table',
     templateUrl: 'DataTable.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {MaterialModules} from '../../core/material/MaterialModules';
 import {StaticSideNavListComponent} from './static/StaticSideNavListComponent';
 import {DynamicSideNavListComponent} from './dynamic/DynamicSideNavListComponent';
+import {RouterModule} from '@angular/router';
 
 const components = [
     StaticSideNavListComponent,
@@ -10,7 +11,8 @@ const components = [
 
 @NgModule({
     imports: [
-        MaterialModules
+        MaterialModules,
+        RouterModule
     ],
     exports: [
         components

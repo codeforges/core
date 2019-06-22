@@ -4,6 +4,8 @@ import {GeneralPageModule} from '../common/pages/general/GeneralPageModule';
 import {MaterialModules} from '../../core/material/MaterialModules';
 import {RouterModule} from '@angular/router';
 import {ThingManagerRouting} from './ThingManagerRouting';
+import {ListTableModule} from '../../core/material/tables/listTable/ListTableModule';
+import {CommonModule} from '@angular/common';
 
 const components = [
     ThingListComponent
@@ -11,8 +13,10 @@ const components = [
 
 @NgModule({
     imports: [
+        CommonModule,
         RouterModule.forChild(ThingManagerRouting),
         MaterialModules,
+        ListTableModule,
         GeneralPageModule
     ],
     exports: [],

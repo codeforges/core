@@ -1,10 +1,10 @@
-import {CrudAwareResource} from './CrudAwareResource';
+import {CrudAware} from './CrudAware';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {CrudQueryParams} from './CrudQueryParams';
 import {CrudQueryStringBuilder} from './CrudQueryStringFactory';
 
-export class CrudResource<T> implements CrudAwareResource<T> {
+export class CrudResource<T> implements CrudAware<T> {
 
     constructor(private URL: string,
                 private readonly httpClient: HttpClient) {
@@ -18,11 +18,11 @@ export class CrudResource<T> implements CrudAwareResource<T> {
         return undefined;
     }
 
-    delete(id: string, query?: CrudQueryParams): Observable<void> {
+    delete(id: string | number, query?: CrudQueryParams): Observable<void> {
         return undefined;
     }
 
-    get(id: string, query?: CrudQueryParams): Observable<T> {
+    get(id: string | number, query?: CrudQueryParams): Observable<T> {
         return this.httpClient.get<T>(`${this.URL}/${id}${CrudQueryStringBuilder.build(query)}`);
     }
 

@@ -1,9 +1,9 @@
 import {Observable} from 'rxjs';
 import {CrudQueryParams} from './CrudQueryParams';
 
-export interface CrudAwareResource<T> {
+export interface CrudAware<T> {
 
-    get(id: string, query?: CrudQueryParams): Observable<T>;
+    get(id: string | number, query?: CrudQueryParams): Observable<T>;
 
     getMany(query?: CrudQueryParams): Observable<T[]>;
 
@@ -13,5 +13,5 @@ export interface CrudAwareResource<T> {
 
     update<K>(payload: K, query?: CrudQueryParams): Observable<T>;
 
-    delete(id: string, query?: CrudQueryParams): Observable<void>;
+    delete(id: string | number, query?: CrudQueryParams): Observable<void>;
 }

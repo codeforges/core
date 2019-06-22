@@ -1,6 +1,7 @@
 ::ng-deep {
     @import "scss/material";
     @import "~bootstrap/scss/bootstrap-grid";
+    @import "~bootstrap/scss/utilities/sizing";
 }
 
 .sidenav-container {
@@ -13,4 +14,12 @@
 
 .sidenav {
     width: 200px;
+}
+
+::ng-deep {
+    button.fab-fixed {
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+    }
 }

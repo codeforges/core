@@ -1,8 +1,14 @@
 <cf-general-page>
-    <h2 header class="mt-0">My Content</h2>
+    <h2 header class="mt-0">Thing Manager</h2>
     <div class="row" content>
         <div class="col-12">
-            asdasd asd asd asd
+            <cf-list-table *ngIf="thingsStream | async as things;"
+                           [displayedColumns]="displayedColumns"
+                           [dataSet]="things">
+            </cf-list-table>
         </div>
     </div>
 </cf-general-page>
+<button mat-fab aria-label="Create Thing" matTooltip="Create thing" class="fab-fixed">
+    <mat-icon>add</mat-icon>
+</button>
