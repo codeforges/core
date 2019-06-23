@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>Create Thing</h2>
 
-<form [formGroup]="createThingForm" mat-dialog-content>
+<form [formGroup]="createThingForm" mat-dialog-content autocomplete="off">
     <mat-form-field class="w-100">
-        <input name="name" formGroupName="name" placeholder="Thing Name" matInput>
+        <input name="name" formControlName="name" placeholder="Thing Name" matInput required>
     </mat-form-field>
     <mat-form-field class="w-100">
         <mat-label>Thing Type</mat-label>
-        <mat-select>
+        <mat-select formControlName="type" required>
             <mat-option *ngFor="let type of availableThingTypesStream | async" [value]="type.id">
                 {{type.name}}
             </mat-option>
@@ -26,11 +26,21 @@
          *ngFor="let item of createThingForm.get('attributes').controls; let i = index;">
         <div [formGroupName]="i">
             <mat-form-field class="w-50 pr-2">
-                <input formControlName="key" placeholder="Attribute Key" matInput>
+                <input formControlName="key" placeholder="Key" matInput [matAutocomplete]="auto" required>
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of availableAttributeStream | async"
+                                (click)="onAttributeSelected(option, i)"
+                                [value]="option.key">
+                        {{option.key}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
-            <mat-form-field class="w-50">
-                <input formControlName="value" placeholder="Attribute Value" matInput>
-                <button mat-icon-button matSuffix (click)="removeAttribute(i)" matTooltip="Remove attribute">
+            <mat-form-field class="w-50 pr-2">
+                <input formControlName="type" placeholder="Type" matInput required>
+                <button mat-icon-button
+                        matSuffix
+                        (click)="removeAttribute(i)"
+                        matTooltip="Remove attribute">
                     <mat-icon>remove_circle_outline</mat-icon>
                 </button>
             </mat-form-field>

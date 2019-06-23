@@ -4,6 +4,10 @@ import {ThingService} from '../../common/api/thing/services/ThingService';
 import {ThingTypeService} from '../../common/api/thing/services/ThingTypeService';
 import {Observable} from 'rxjs';
 import {ThingType} from '../../common/api/thing/dto/ThingType';
+import {ThingAttributeService} from '../../common/api/thing/services/ThingAttributeService';
+import {ThingAttribute} from '../../common/api/thing/dto/ThingAttribute';
+import * as _ from 'lodash';
+import {Thing} from '../../common/api/thing/dto/Thing';
 
 @Component({
     selector: 'app-create-thing-dialog',
@@ -13,15 +17,20 @@ import {ThingType} from '../../common/api/thing/dto/ThingType';
 export class CreateThingDialogComponent implements OnInit {
     public createThingForm: FormGroup;
     public availableThingTypesStream: Observable<ThingType[]>;
+    public availableAttributeStream: Observable<ThingAttribute[]>;
     public attributes: FormArray;
 
     constructor(private fb: FormBuilder,
                 private thingService: ThingService,
+                private thingAttributeService: ThingAttributeService,
                 private thingTypeService: ThingTypeService) {
     }
 
     ngOnInit() {
         this.availableThingTypesStream = this.thingTypeService.getMany();
+        this.availableAttributeStream = this.thingAttributeService
+            .getMany({select: ['id', 'key', 'type']});
+
         this.createThingForm = this.fb.group(
             {
                 name: ['', Validators.required],
@@ -33,7 +42,19 @@ export class CreateThingDialogComponent implements OnInit {
     }
 
     public submit() {
-        console.log(this.createThingForm);
+        if (this.createThingForm.valid) {
+            const payload = this.createThingForm.getRawValue() as Thing;
+
+            payload.attributes = _.map(payload.attributes, (attr) => {
+                console.log(attr);
+                if (!attr.id) {
+                    attr = _.omit(attr, 'id');
+                }
+                return attr;
+            });
+            _.set(payload, 'type.id', _.get(payload, 'type'));
+            this.thingService.create(payload).subscribe();
+        }
     }
 
     public addAttribute() {
@@ -44,10 +65,17 @@ export class CreateThingDialogComponent implements OnInit {
         this.attributes.removeAt(index);
     }
 
+    onAttributeSelected(selectedAttribute: ThingAttribute, controlIndex) {
+        const attribute = (this.createThingForm.get('attributes') as FormArray).at(controlIndex);
+        attribute.get('type').setValue(selectedAttribute.type);
+        attribute.get('id').setValue(selectedAttribute.id);
+    }
+
     private createAttributeFormGroup(): FormGroup {
         return this.fb.group({
-            key: '',
-            value: ''
+            id: '',
+            key: ['', Validators.required],
+            type: ['', Validators.required]
         });
     }
 }

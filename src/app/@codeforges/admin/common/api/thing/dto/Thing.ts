@@ -3,7 +3,7 @@ import {ThingAttribute} from './ThingAttribute';
 
 export interface Thing {
     id?: number;
-    name: string;
-    type: ThingType;
-    attributes: ThingAttribute[];
+    name?: string;
+    type?: ThingType;
+    attributes?: ThingAttribute[];
 }

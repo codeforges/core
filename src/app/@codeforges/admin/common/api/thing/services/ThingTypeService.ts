@@ -12,19 +12,19 @@ export class ThingTypeService implements CrudAware<ThingType> {
     }
 
     create<K>(payload: K, query?: CrudQueryParams): Observable<ThingType> {
-        return undefined;
+        return this.resource.create(payload, query);
     }
 
     createMany<K>(payload: K[], query?: CrudQueryParams): Observable<ThingType[]> {
-        return undefined;
+        return this.resource.createMany(payload, query);
     }
 
     delete(id: string | number, query?: CrudQueryParams): Observable<void> {
-        return undefined;
+        return this.resource.delete(id, query);
     }
 
     get(id: string | number, query?: CrudQueryParams): Observable<ThingType> {
-        return undefined;
+        return this.resource.get(id, query);
     }
 
     getMany(query?: CrudQueryParams): Observable<ThingType[]> {
@@ -32,6 +32,6 @@ export class ThingTypeService implements CrudAware<ThingType> {
     }
 
     update<K>(payload: K, query?: CrudQueryParams): Observable<ThingType> {
-        return undefined;
+        return this.resource.update(payload, query);
     }
 }

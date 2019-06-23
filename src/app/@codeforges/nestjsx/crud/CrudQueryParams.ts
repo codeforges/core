@@ -2,7 +2,7 @@ import {QueryFields, QueryFilter, QuerySort} from '@nestjsx/crud-request';
 
 export interface CrudQueryParams {
     select?: QueryFields;
-    filters: QueryFilter[];
+    filters?: QueryFilter[];
     orOperators?: QueryFilter[];
     joinOperators?: QueryFilter[];
     sort?: QuerySort;

@@ -15,11 +15,11 @@ export class CrudResource<T> implements CrudAware<T> {
     }
 
     createMany<K>(payload: K[], query?: CrudQueryParams): Observable<T[]> {
-        return undefined;
+        return this.httpClient.post<T[]>(this.URL + '/bulk' + CrudQueryStringBuilder.build(query), payload);
     }
 
     delete(id: string | number, query?: CrudQueryParams): Observable<void> {
-        return undefined;
+        return this.httpClient.delete<void>(this.URL + '/' + id + CrudQueryStringBuilder.build(query));
     }
 
     get(id: string | number, query?: CrudQueryParams): Observable<T> {
@@ -31,6 +31,6 @@ export class CrudResource<T> implements CrudAware<T> {
     }
 
     update<K>(payload: K, query?: CrudQueryParams): Observable<T> {
-        return undefined;
+        return this.httpClient.put<T>(this.URL + CrudQueryStringBuilder.build(query), payload);
     }
 }

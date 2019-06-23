@@ -25,7 +25,7 @@ export class ThingListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.thingsStream = this.thingService.getMany();
+        this.thingsStream = this.thingService.getMany({select: ['id', 'name', 'type']});
     }
 
     public openCreateDialog() {
