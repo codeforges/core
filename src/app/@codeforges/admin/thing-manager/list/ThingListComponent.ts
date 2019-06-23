@@ -30,8 +30,7 @@ export class ThingListComponent implements OnInit {
 
     public openCreateDialog() {
         const ref = this.matDialog.open(CreateThingDialogComponent, {
-            height: '30vh',
-            width: '30vw',
+            width: '50vw',
         });
     }
 }
