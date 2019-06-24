@@ -47,7 +47,7 @@
         </div>
     </div>
 </form>
-
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button (click)="submit()" color="primary">Submit</button>

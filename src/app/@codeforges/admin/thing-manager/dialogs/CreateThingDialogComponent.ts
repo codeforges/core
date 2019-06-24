@@ -8,6 +8,8 @@ import {ThingAttributeService} from '../../common/api/thing/services/ThingAttrib
 import {ThingAttribute} from '../../common/api/thing/dto/ThingAttribute';
 import * as _ from 'lodash';
 import {Thing} from '../../common/api/thing/dto/Thing';
+import {MatDialogRef} from '@angular/material';
+import {finalize} from 'rxjs/operators';
 
 @Component({
     selector: 'app-create-thing-dialog',
@@ -19,9 +21,11 @@ export class CreateThingDialogComponent implements OnInit {
     public availableThingTypesStream: Observable<ThingType[]>;
     public availableAttributeStream: Observable<ThingAttribute[]>;
     public attributes: FormArray;
+    public isLoading = false;
 
     constructor(private fb: FormBuilder,
                 private thingService: ThingService,
+                private dialogRef: MatDialogRef<CreateThingDialogComponent>,
                 private thingAttributeService: ThingAttributeService,
                 private thingTypeService: ThingTypeService) {
     }
@@ -43,6 +47,7 @@ export class CreateThingDialogComponent implements OnInit {
 
     public submit() {
         if (this.createThingForm.valid) {
+            this.isLoading = true;
             const payload = this.createThingForm.getRawValue() as Thing;
 
             payload.attributes = _.map(payload.attributes, (attr) => {
@@ -53,7 +58,11 @@ export class CreateThingDialogComponent implements OnInit {
                 return attr;
             });
             _.set(payload, 'type.id', _.get(payload, 'type'));
-            this.thingService.create(payload).subscribe();
+            this.thingService.create(payload)
+                .pipe(finalize(() => this.isLoading = false))
+                .subscribe(() => {
+                    this.dialogRef.close(true);
+                });
         }
     }
 

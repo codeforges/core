@@ -4,6 +4,7 @@
         <div class="col-12">
             <cf-list-table *ngIf="thingsStream | async as things;"
                            [displayedColumns]="displayedColumns"
+                           [settings]="{actionMenu: false}"
                            [dataSet]="things">
             </cf-list-table>
         </div>

@@ -17,7 +17,7 @@ export class ThingListComponent implements OnInit {
     public displayedColumns: GeneralTableColumn[] = [
         {columnKey: 'id', columnName: 'ID'},
         {columnKey: 'name', columnName: 'Name'},
-        {columnKey: 'type', columnName: 'Type'},
+        {columnKey: 'type.name', columnName: 'Type'},
     ];
 
     constructor(private readonly thingService: ThingService,
@@ -25,12 +25,21 @@ export class ThingListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.thingsStream = this.thingService.getMany({select: ['id', 'name', 'type']});
+        this.setThingStream();
     }
 
     public openCreateDialog() {
         const ref = this.matDialog.open(CreateThingDialogComponent, {
             width: '50vw',
         });
+        ref.afterClosed().subscribe((success) => {
+            if (success) {
+                this.setThingStream();
+            }
+        });
+    }
+
+    private setThingStream() {
+        this.thingsStream = this.thingService.getMany({select: ['id', 'name', 'type']});
     }
 }
