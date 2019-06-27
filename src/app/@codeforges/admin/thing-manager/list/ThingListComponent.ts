@@ -28,9 +28,10 @@ export class ThingListComponent implements OnInit {
         this.setThingStream();
     }
 
-    public openCreateDialog() {
+    public openCreateDialog($event?: Thing) {
         const ref = this.matDialog.open(CreateThingDialogComponent, {
             width: '50vw',
+            data: {thing: $event}
         });
         ref.afterClosed().subscribe((success) => {
             if (success) {

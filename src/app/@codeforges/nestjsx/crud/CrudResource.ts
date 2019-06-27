@@ -30,7 +30,7 @@ export class CrudResource<T> implements CrudAware<T> {
         return this.httpClient.get<T[]>(`${this.URL}${CrudQueryStringBuilder.build(query)}`);
     }
 
-    update<K>(payload: K, query?: CrudQueryParams): Observable<T> {
-        return this.httpClient.put<T>(this.URL + CrudQueryStringBuilder.build(query), payload);
+    update<K>(id: string | number, payload: K, query?: CrudQueryParams): Observable<T> {
+        return this.httpClient.patch<T>(this.URL + '/' + id + CrudQueryStringBuilder.build(query), payload);
     }
 }

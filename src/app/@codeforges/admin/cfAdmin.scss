@@ -26,4 +26,9 @@
     mat-dialog-content, mat-dialog-container {
         font-family: Roboto, "Helvetica Neue", sans-serif;
     }
+
+    .mat-row:hover {
+        background-color: #f9f9f9;
+        cursor: pointer;
+    }
 }

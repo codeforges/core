@@ -2,11 +2,15 @@
     <h2 header class="mt-0">Thing Manager</h2>
     <div class="row" content>
         <div class="col-12">
-            <cf-list-table *ngIf="thingsStream | async as things;"
+            <cf-list-table *ngIf="thingsStream | async as things; else loading"
                            [displayedColumns]="displayedColumns"
+                           (rowSelected)="openCreateDialog($event)"
                            [settings]="{actionMenu: false}"
                            [dataSet]="things">
             </cf-list-table>
+            <ng-template #loading>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </ng-template>
         </div>
     </div>
 </cf-general-page>

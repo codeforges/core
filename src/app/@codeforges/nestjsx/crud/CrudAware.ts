@@ -11,7 +11,7 @@ export interface CrudAware<T> {
 
     createMany<K>(payload: K[], query?: CrudQueryParams): Observable<T[]>;
 
-    update<K>(payload: K, query?: CrudQueryParams): Observable<T>;
+    update<K>(id: string | number, payload: K, query?: CrudQueryParams): Observable<T>;
 
     delete(id: string | number, query?: CrudQueryParams): Observable<void>;
 }
