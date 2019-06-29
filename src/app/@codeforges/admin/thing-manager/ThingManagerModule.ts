@@ -8,6 +8,7 @@ import {ListTableModule} from '../../core/material/tables/listTable/ListTableMod
 import {CommonModule} from '@angular/common';
 import {CreateThingDialogComponent} from './dialogs/CreateThingDialogComponent';
 import {ReactiveFormsModule} from '@angular/forms';
+import {CFMaterialDialogModule} from '../../core/material/dialogs/MaterialDialogModule';
 
 const components = [
     ThingListComponent,
@@ -17,6 +18,7 @@ const components = [
 @NgModule({
     imports: [
         CommonModule,
+        CFMaterialDialogModule,
         RouterModule.forChild(ThingManagerRouting),
         MaterialModules,
         ListTableModule,

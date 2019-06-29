@@ -4,10 +4,26 @@
         <div class="col-12">
             <cf-list-table *ngIf="thingsStream | async as things; else loading"
                            [displayedColumns]="displayedColumns"
-                           (rowSelected)="openCreateDialog($event)"
-                           [settings]="{actionMenu: false}"
                            [dataSet]="things">
+                <ng-template let-element>
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="openCreateDialog(element)">
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="deleteThing(element)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                </ng-template>
             </cf-list-table>
+            <ng-container *ngIf="isLoading">
+                <ng-container *ngTemplateOutlet="loading"></ng-container>
+            </ng-container>
             <ng-template #loading>
                 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
             </ng-template>

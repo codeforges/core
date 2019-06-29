@@ -64,14 +64,14 @@ In order to use the actionMenu enable the settings `actionMenu (default: true)` 
 
 ```html
  <app-admin-list-table [dataSet]="dataSet" [displayedColumns]="displayedColumns">
-    <ng-template>
+    <ng-template let-element>
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
+            <button mat-menu-item (click)="doSomething(element)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
             </button>
             <button mat-menu-item disabled>
                 <mat-icon>voicemail</mat-icon>
@@ -87,7 +87,7 @@ In order to use the actionMenu enable the settings `actionMenu (default: true)` 
 
 ```
 Please note that the menu template should be wrapped in `<ng-template>`
-
+The `let-element` in the `ng-template` gets a reference to the element of your array.
 
 ListTableComponent Inputs: 
 

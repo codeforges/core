@@ -7,7 +7,7 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatListModule,
+    MatListModule, MatMenuModule,
     MatProgressBarModule,
     MatSelectModule,
     MatSidenavModule,
@@ -27,6 +27,7 @@ const modules = [
     MatListModule,
     MatAutocompleteModule,
     MatTooltipModule,
+    MatMenuModule,
     MatProgressBarModule,
     MatIconModule
 ];

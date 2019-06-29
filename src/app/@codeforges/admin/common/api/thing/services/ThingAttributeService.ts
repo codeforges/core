@@ -31,7 +31,7 @@ export class ThingAttributeService implements CrudAware<ThingAttribute> {
         return this.resource.getMany(query);
     }
 
-    update<K>(payload: K, query?: CrudQueryParams): Observable<ThingAttribute> {
-        return this.resource.update(payload, query);
+    update<K>(id: string | number, payload: K, query?: CrudQueryParams): Observable<ThingAttribute> {
+        return this.resource.update(id, payload, query);
     }
 }

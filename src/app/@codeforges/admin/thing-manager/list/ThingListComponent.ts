@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {GeneralTableColumn} from '../../../core/material/tables/dataModels/GeneralTableColumn';
 import {ThingService} from '../../common/api/thing/services/ThingService';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {Thing} from '../../common/api/thing/dto/Thing';
 import {MatDialog} from '@angular/material';
 import {CreateThingDialogComponent} from '../dialogs/CreateThingDialogComponent';
+import {ConfirmationDialogComponent} from '../../../core/material/dialogs/confirmation/ConfirmationDialogComponent';
+import {finalize, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'cf-thing-list',
@@ -13,6 +15,7 @@ import {CreateThingDialogComponent} from '../dialogs/CreateThingDialogComponent'
 
 export class ThingListComponent implements OnInit {
     public thingsStream: Observable<Thing[]>;
+    public isLoading = false;
 
     public displayedColumns: GeneralTableColumn[] = [
         {columnKey: 'id', columnName: 'ID'},
@@ -38,6 +41,23 @@ export class ThingListComponent implements OnInit {
                 this.setThingStream();
             }
         });
+    }
+
+    public deleteThing(thing: Thing) {
+        const ref = this.matDialog.open(ConfirmationDialogComponent);
+        ref.afterClosed()
+            .pipe(
+                switchMap((success) => {
+                    if (success) {
+                        this.isLoading = true;
+                        return this.thingService.delete(thing.id);
+                    } else {
+                        return EMPTY;
+                    }
+                }),
+                finalize(() => this.isLoading = false)
+            )
+            .subscribe((success) => this.setThingStream());
     }
 
     private setThingStream() {
