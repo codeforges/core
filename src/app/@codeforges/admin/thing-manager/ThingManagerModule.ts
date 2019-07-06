@@ -1,18 +1,20 @@
 import {NgModule} from '@angular/core';
-import {ThingListComponent} from './list/ThingListComponent';
+import {ThingListComponent} from './thing/list/ThingListComponent';
 import {GeneralPageModule} from '../common/pages/general/GeneralPageModule';
 import {MaterialModules} from '../../core/material/MaterialModules';
 import {RouterModule} from '@angular/router';
 import {ThingManagerRouting} from './ThingManagerRouting';
 import {ListTableModule} from '../../core/material/tables/listTable/ListTableModule';
 import {CommonModule} from '@angular/common';
-import {CreateThingDialogComponent} from './dialogs/CreateThingDialogComponent';
+import {CreateThingDialogComponent} from './thing/dialogs/CreateThingDialogComponent';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CFMaterialDialogModule} from '../../core/material/dialogs/MaterialDialogModule';
+import {AttributeListComponent} from './attributes/list/AttributeListComponent';
 
 const components = [
     ThingListComponent,
-    CreateThingDialogComponent
+    CreateThingDialogComponent,
+    AttributeListComponent
 ];
 
 @NgModule({

@@ -1,0 +1,11 @@
+::ng-deep {
+    cf-side-menu-item {
+        .mat-list-item-content {
+            justify-content: space-between;
+        }
+
+        .sub-nav {
+            background-color: #eaeaea;
+        }
+    }
+}

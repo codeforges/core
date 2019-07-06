@@ -1,3 +1,3 @@
 <mat-nav-list>
-    <a mat-list-item routerLink="things/list">Thing Manager</a>
+    <cf-side-menu-item *ngFor="let item of navItems" [item]="item"></cf-side-menu-item>
 </mat-nav-list>

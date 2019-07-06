@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SideMenuNavItem} from '../menu-item/SideMenuNavItem';
 
 @Component({
     selector: 'cf-static-side-nav-list',
@@ -6,6 +7,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 
 export class StaticSideNavListComponent implements OnInit {
+    public navItems: SideMenuNavItem[] = [
+        {
+            displayName: 'Thing Manager',
+            children: [
+                {displayName: 'Things', route: 'things/list'},
+                {displayName: 'Attributes', route: 'things/attributes'},
+            ]
+        }
+    ];
+
     constructor() {
     }
 
