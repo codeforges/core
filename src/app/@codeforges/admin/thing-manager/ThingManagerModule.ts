@@ -10,10 +10,12 @@ import {CreateThingDialogComponent} from './thing/dialogs/CreateThingDialogCompo
 import {ReactiveFormsModule} from '@angular/forms';
 import {CFMaterialDialogModule} from '../../core/material/dialogs/MaterialDialogModule';
 import {AttributeListComponent} from './attributes/list/AttributeListComponent';
+import {CreateAttributeDialogComponent} from './attributes/dialogs/CreateAttributeDialogComponent';
 
 const components = [
     ThingListComponent,
     CreateThingDialogComponent,
+    CreateAttributeDialogComponent,
     AttributeListComponent
 ];
 
@@ -30,6 +32,7 @@ const components = [
     exports: [],
     entryComponents: [
         CreateThingDialogComponent,
+        CreateAttributeDialogComponent,
     ],
     declarations: components,
     providers: [],

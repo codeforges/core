@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import {GeneralListComponent} from '../../../common/components/GeneralListComponent';
 import {ThingAttribute} from '../../../common/api/thing/dto/ThingAttribute';
 import {ThingAttributeService} from '../../../common/api/thing/services/ThingAttributeService';
+import {CreateAttributeDialogComponent} from '../dialogs/CreateAttributeDialogComponent';
 
 @Component({
     selector: 'cf-thing-list',
@@ -27,7 +28,6 @@ export class AttributeListComponent extends GeneralListComponent<ThingAttribute>
     }
 
     openCreateDialog(item?: ThingAttribute) {
-        // this.create(item)
+        this.create(CreateAttributeDialogComponent, item);
     }
-
 }

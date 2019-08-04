@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Manage Attribute</h2>
+
+<form [formGroup]="formGroup" mat-dialog-content autocomplete="off">
+    <mat-form-field class="w-100">
+        <input name="name"
+               formControlName="key"
+               placeholder="Attribute Key"
+               matInput
+               required>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+        <input formControlName="type" placeholder="Attribute Type" matInput required>
+    </mat-form-field>
+</form>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="submit()" color="primary">Submit</button>
+</mat-dialog-actions>

@@ -74,9 +74,9 @@ export class CreateThingDialogComponent implements OnInit {
 
     private createAttributeFormGroup(attribute?: ThingAttribute): FormGroup {
         return this.fb.group({
-            id: attribute.id || '',
-            key: [attribute.key || '', Validators.required],
-            type: [attribute.type || '', Validators.required]
+            id: _.get(attribute, 'id') || '',
+            key: [_.get(attribute, 'key') || '', Validators.required],
+            type: [_.get(attribute, 'type') || '', Validators.required]
         });
     }
 

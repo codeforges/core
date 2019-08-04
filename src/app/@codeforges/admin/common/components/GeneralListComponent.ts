@@ -25,8 +25,8 @@ export abstract class GeneralListComponent<T> implements OnInit {
 
     public abstract deleteItem(item: T);
 
-    protected create<K>(component: ComponentType<K>, item?: T) {
-        const ref = this.matDialog.open(component, {
+    protected create<K>(dialogComponent: ComponentType<K>, item?: T) {
+        const ref = this.matDialog.open(dialogComponent, {
             width: '50vw',
             data: {item}
         });
