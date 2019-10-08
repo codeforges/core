@@ -1,16 +1,19 @@
-<h2 mat-dialog-title>Manage - Thing</h2>
+<h2 mat-dialog-title>Manage Types</h2>
 
-<form [formGroup]="createThingForm" mat-dialog-content autocomplete="off">
+<form [formGroup]="formGroup" mat-dialog-content autocomplete="off">
     <mat-form-field class="w-100">
-        <input name="name" formControlName="name" placeholder="Thing Name" matInput required>
+        <input name="name"
+               formControlName="name"
+               placeholder="Type name"
+               matInput
+               required>
     </mat-form-field>
     <mat-form-field class="w-100">
-        <mat-label>Thing Type</mat-label>
-        <mat-select formControlName="type" required>
-            <mat-option *ngFor="let type of availableThingTypesStream | async" [value]="type.id">
-                {{type.name}}
-            </mat-option>
-        </mat-select>
+        <input name="icon"
+               formControlName="icon"
+               placeholder="Type Icon"
+               matInput
+               required>
     </mat-form-field>
     <div class="row d-flex align-items-center">
         <div class="col-6">
@@ -23,7 +26,7 @@
         </div>
     </div>
     <div formArrayName="attributes"
-         *ngFor="let item of createThingForm.get('attributes').controls; let i = index;">
+         *ngFor="let item of formGroup.get('attributes')?.controls; let i = index;">
         <div [formGroupName]="i">
             <mat-form-field class="w-50 pr-2">
                 <input formControlName="key" placeholder="Key" matInput [matAutocomplete]="auto" required>

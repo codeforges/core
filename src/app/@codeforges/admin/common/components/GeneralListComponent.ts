@@ -6,6 +6,8 @@ import {QueryFields} from '@nestjsx/crud-request';
 import {ComponentType} from '@angular/cdk/portal';
 import {finalize, switchMap} from 'rxjs/operators';
 import {ConfirmationDialogComponent} from '../../../core/material/dialogs/confirmation/ConfirmationDialogComponent';
+import {CrudQueryParams} from '../../../nestjsx/crud/CrudQueryParams';
+import * as _ from 'lodash';
 
 
 export abstract class GeneralListComponent<T> implements OnInit {
@@ -14,7 +16,8 @@ export abstract class GeneralListComponent<T> implements OnInit {
 
     protected constructor(private readonly service: CrudAware<T>,
                           private readonly matDialog: MatDialog,
-                          private queryFields?: QueryFields) {
+                          private queryFields?: QueryFields,
+                          private query?: CrudQueryParams) {
     }
 
     ngOnInit() {
@@ -56,6 +59,6 @@ export abstract class GeneralListComponent<T> implements OnInit {
 
     private updateListStream() {
         const options = this.queryFields ? {select: this.queryFields} : null;
-        this.listStream = this.service.getMany(options);
+        this.listStream = this.service.getMany(_.merge(options, this.query));
     }
 }

@@ -44,7 +44,6 @@ export class CreateAttributeDialogComponent implements OnInit {
             {
                 key: [_.get(this.data, 'item.key') || '', Validators.required],
                 type: [_.get(this.data, 'item.type') || '', Validators.required],
-                value: [_.get(this.data, 'item.value') || ''],
             }
         );
     }

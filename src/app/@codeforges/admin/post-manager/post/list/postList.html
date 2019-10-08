@@ -1,0 +1,39 @@
+<cf-general-page>
+    <h2 header class="mt-0">Thing Manager</h2>
+    <div class="row" content>
+        <div class="col-12">
+            <cf-list-table *ngIf="listStream | async as things; else loading"
+                           [displayedColumns]="displayedColumns"
+                           [dataSet]="things">
+                <ng-template let-element>
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="openCreateDialog(element)">
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="deleteItem(element)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                </ng-template>
+            </cf-list-table>
+            <ng-container *ngIf="isLoading">
+                <ng-container *ngTemplateOutlet="loading"></ng-container>
+            </ng-container>
+            <ng-template #loading>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </ng-template>
+        </div>
+    </div>
+</cf-general-page>
+<button mat-fab
+        aria-label="Create Thing"
+        (click)="openCreateDialog()"
+        matTooltip="Create thing"
+        class="fab-fixed">
+    <mat-icon>add</mat-icon>
+</button>

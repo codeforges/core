@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef, ViewEncapsulation} from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import {DataTableComponent} from '../dataTable/DataTableComponent';
 import {GeneralTableColumn} from '../dataModels/GeneralTableColumn';
 import * as _ from 'lodash';
@@ -7,6 +18,7 @@ import * as _ from 'lodash';
     selector: 'cf-list-table',
     templateUrl: 'listTable.html',
     styleUrls: ['listTable.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 
@@ -29,6 +41,9 @@ export class ListTableComponent extends DataTableComponent implements OnInit, Af
 
     public getElementValue(element, column: GeneralTableColumn, canTruncate = true) {
         let value = _.get(element, column.columnKey);
+        if (column.findBy) {
+            value = _.get(_.find(value, column.findBy.predicate), column.findBy.path);
+        }
         if (_.isArray(value)) {
             if (column.arrayKey) {
                 const keys = _.isArray(column.arrayKey) ? column.arrayKey : [column.arrayKey];

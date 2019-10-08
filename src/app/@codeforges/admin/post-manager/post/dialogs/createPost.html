@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Manage Post</h2>
+
+<form [formGroup]="createThingForm" mat-dialog-content autocomplete="off">
+    <mat-form-field class="w-100">
+        <input name="name" formControlName="name" placeholder="Thing Name" matInput required>
+    </mat-form-field>
+
+</form>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="submit()" color="primary">Submit</button>
+</mat-dialog-actions>

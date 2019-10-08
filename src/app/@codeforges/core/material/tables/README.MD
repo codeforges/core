@@ -129,6 +129,7 @@ export interface GeneralTableColumn {
     isImage?: boolean;
     isEditable?: boolean;
     showSize?: boolean;
+    findBy?: {predicate: (element: any) => boolean, path: string };
     arrayKey?: string | string[];
     arrayValueSeparator?: string;
     newlineArrayItems?: boolean;
@@ -165,6 +166,7 @@ The General Table Column is configuration item for each column
 - `showSize` - if is an array this flag will render its size
 - `arrayKey` - if is a array of objects will render its value selected by key or keys array
 - `arrayValueSeparator` - if provided will be used to join the arrayKeys values using it
+- `findBy` - If is an array will find a element by given `predicate` and select a value by `path` 
 - `isInvisible` - not visible 
 - `icon, iconAction, iconGetClass` - if a icon should be show , call back action if icon is clicked, conditional css class
 - `valuePrefix, valuePrefixNoValue` - sets a prefix value for column , sets a prefix value if column value is empty

@@ -11,11 +11,15 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CFMaterialDialogModule} from '../../core/material/dialogs/MaterialDialogModule';
 import {AttributeListComponent} from './attributes/list/AttributeListComponent';
 import {CreateAttributeDialogComponent} from './attributes/dialogs/CreateAttributeDialogComponent';
+import {ThingTypeListComponent} from './thing-type/list/ThingTypeListComponent';
+import {CreateThingTypeDialogComponent} from './thing-type/dialogs/CreateThingTypeDialogComponent';
 
 const components = [
     ThingListComponent,
     CreateThingDialogComponent,
     CreateAttributeDialogComponent,
+    ThingTypeListComponent,
+    CreateThingTypeDialogComponent,
     AttributeListComponent
 ];
 
@@ -33,6 +37,7 @@ const components = [
     entryComponents: [
         CreateThingDialogComponent,
         CreateAttributeDialogComponent,
+        CreateThingTypeDialogComponent
     ],
     declarations: components,
     providers: [],

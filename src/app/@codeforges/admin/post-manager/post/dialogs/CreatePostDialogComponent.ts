@@ -13,10 +13,10 @@ import {finalize} from 'rxjs/operators';
 
 @Component({
     selector: 'app-create-thing-dialog',
-    templateUrl: 'createThing.html',
+    templateUrl: 'createPost.html',
 })
-// TODO: selectable attributes based on type
-export class CreateThingDialogComponent implements OnInit {
+
+export class CreatePostDialogComponent implements OnInit {
     public createThingForm: FormGroup;
     public availableThingTypesStream: Observable<ThingType[]>;
     public availableAttributeStream: Observable<ThingAttribute[]>;
@@ -26,7 +26,7 @@ export class CreateThingDialogComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 @Inject(MAT_DIALOG_DATA) public data: { item: Thing },
                 private thingService: ThingService,
-                private dialogRef: MatDialogRef<CreateThingDialogComponent>,
+                private dialogRef: MatDialogRef<CreatePostDialogComponent>,
                 private thingAttributeService: ThingAttributeService,
                 private thingTypeService: ThingTypeService) {
     }
@@ -56,20 +56,6 @@ export class CreateThingDialogComponent implements OnInit {
 
             this.createOrUpdate(payload);
         }
-    }
-
-    public addAttribute() {
-        this.attributes.push(this.createAttributeFormGroup());
-    }
-
-    public removeAttribute(index: number) {
-        this.attributes.removeAt(index);
-    }
-
-    public onAttributeSelected(selectedAttribute: ThingAttribute, controlIndex) {
-        const attribute = (this.createThingForm.get('attributes') as FormArray).at(controlIndex);
-        attribute.get('type').setValue(selectedAttribute.type);
-        attribute.get('id').setValue(selectedAttribute.id);
     }
 
     private createAttributeFormGroup(attribute?: ThingAttribute): FormGroup {

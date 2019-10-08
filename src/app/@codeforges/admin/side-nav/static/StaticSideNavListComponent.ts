@@ -13,6 +13,7 @@ export class StaticSideNavListComponent implements OnInit {
             children: [
                 {displayName: 'Things', route: 'things/list'},
                 {displayName: 'Attributes', route: 'things/attributes'},
+                {displayName: 'Types', route: 'things/types'},
             ]
         }
     ];

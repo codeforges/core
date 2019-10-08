@@ -4,6 +4,7 @@ export interface GeneralTableColumn {
     isDate?: boolean;
     dateFormat?: string;
     timezone?: string;
+    findBy?: {predicate: (element: any) => boolean, path: string };
     isImage?: boolean;
     isEditable?: boolean;
     showSize?: boolean;
