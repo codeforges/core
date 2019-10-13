@@ -24,14 +24,15 @@ export class CreateThingTypeDialogComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 @Inject(MAT_DIALOG_DATA) public data: { item: ThingType },
                 private thingTypeService: ThingTypeService,
-                private attributeService: ThingAttributeService,
+                private thingAttributeService: ThingAttributeService,
                 private dialogRef: MatDialogRef<CreateThingTypeDialogComponent>) {
     }
 
     ngOnInit() {
-        this.availableAttributeStream = this.attributeService
+        this.availableAttributeStream = this.thingAttributeService
             .getMany({select: ['id', 'key', 'type']});
         this.buildForm();
+        console.log(this.formGroup);
     }
 
 

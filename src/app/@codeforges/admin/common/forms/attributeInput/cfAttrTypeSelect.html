@@ -1,0 +1,8 @@
+<mat-form-field [ngClass]="{'w-100': fullWidth}">
+    <mat-label>Attribute Type</mat-label>
+    <mat-select required [formControl]="attributeFormControl">
+        <mat-option *ngFor="let type of attrTypes" [value]="type">
+            {{type}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

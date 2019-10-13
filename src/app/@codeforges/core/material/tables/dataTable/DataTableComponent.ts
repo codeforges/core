@@ -27,8 +27,8 @@ import * as _ from 'lodash';
 })
 
 export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
-    @ViewChild(MatSort, { static: false }) sort: MatSort;
-    @ContentChild(TemplateRef, { static: false }) actionMenuTemplate: TemplateRef<any>;
+    @ViewChild(MatSort, {static: false}) sort: MatSort;
+    @ContentChild(TemplateRef, {static: false}) actionMenuTemplate: TemplateRef<any>;
 
     @Input() searchTerm = '';
     @Input() filter: { key: string, value: any };
@@ -120,7 +120,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     private initColumns() {
         if (this.displayedColumns) {
             this.columnIds = this.displayedColumns
-                .map(column => column.columnKey);
+                .map(column => column.columnKey + (column.columnKeySuffix || ''));
             if (this.settings.checkBoxColumn) {
                 this.columnIds.unshift('select');
             }

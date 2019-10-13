@@ -26,7 +26,7 @@ export class DynamicSideNavListComponent extends StaticSideNavListComponent impl
                     return _.map(res, (type) => {
                         return {
                             displayName: _.capitalize(type.name) + ' Manager',
-                            route: type.name + '/list',
+                            route: _.lowerCase(type.name) + '/list',
                             iconName: type.icon
                         };
                     });

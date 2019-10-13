@@ -8,14 +8,15 @@
            class="w-100 table-striped">
 
         <!-- Position Column -->
-        <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column.columnKey}}">
+        <ng-container *ngFor="let column of displayedColumns"
+                      matColumnDef="{{column.columnKey + (column.columnKeySuffix || '')}}">
 
             <ng-container *ngIf="column.columnName; else noHeader">
                 <th mat-header-cell
                     *matHeaderCellDef
                     mat-sort-header
                     [disabled]="column.sortingDisabled">
-                    {{ column.columnName}}
+                    {{column.columnName}}
                 </th>
             </ng-container>
             <ng-template #noHeader>

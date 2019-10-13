@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {GeneralTableColumn} from '../../../../core/material/tables/dataModels/GeneralTableColumn';
 import {ThingService} from '../../../common/api/thing/services/ThingService';
 import {Thing} from '../../../common/api/thing/dto/Thing';
@@ -8,19 +8,32 @@ import {CreatePostDialogComponent} from '../dialogs/CreatePostDialogComponent';
 
 @Component({
     selector: 'cf-thing-list',
-    templateUrl: 'postList.html'
+    templateUrl: 'postList.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PostListComponent extends GeneralListComponent<Thing> {
     public displayedColumns: GeneralTableColumn[] = [
         {columnKey: 'id', columnName: 'ID'},
-        {columnKey: 'name', columnName: 'Title'},
         {
-            columnKey: 'attributes',
+            columnKey: 'type.attributes',
+            columnKeySuffix: '-title',
+            columnName: 'Title',
+            findBy: {
+                predicate: (element => element.key === 'title'),
+                path: 'value'
+            },
+            truncateSize: 50
+        },
+        {
+            columnKey: 'type.attributes',
+            columnKeySuffix: '-content',
             columnName: 'Content',
             findBy: {
-                predicate: (element => element.key === 'post_content'),
-                path: 'content'
+                predicate: (element => {
+                    return element.key === 'content';
+                }),
+                path: 'value'
             },
             truncateSize: 50
         },
@@ -30,9 +43,12 @@ export class PostListComponent extends GeneralListComponent<Thing> {
                 matDialog: MatDialog) {
         super(thingService,
             matDialog,
-            ['id', 'name', 'attributes'],
+            ['id', 'name', 'type'],
             {
-                filters: [{field: 'type.name', operator: 'eq', value: 'post'}]
+                filters: [
+                    {field: 'type.name', operator: 'eq', value: 'post'},
+                    {field: 'isInitial', operator: 'ne', value: 'true'},
+                ]
             }
         );
     }

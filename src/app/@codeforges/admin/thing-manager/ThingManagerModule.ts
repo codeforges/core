@@ -13,6 +13,7 @@ import {AttributeListComponent} from './attributes/list/AttributeListComponent';
 import {CreateAttributeDialogComponent} from './attributes/dialogs/CreateAttributeDialogComponent';
 import {ThingTypeListComponent} from './thing-type/list/ThingTypeListComponent';
 import {CreateThingTypeDialogComponent} from './thing-type/dialogs/CreateThingTypeDialogComponent';
+import {NameModule} from '../common/forms/attributeInput/CFAttrTypeSelectModule';
 
 const components = [
     ThingListComponent,
@@ -31,7 +32,8 @@ const components = [
         MaterialModules,
         ListTableModule,
         GeneralPageModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NameModule
     ],
     exports: [],
     entryComponents: [

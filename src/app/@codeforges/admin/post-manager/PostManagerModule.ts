@@ -9,6 +9,7 @@ import {CommonModule} from '@angular/common';
 import {CreatePostDialogComponent} from './post/dialogs/CreatePostDialogComponent';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CFMaterialDialogModule} from '../../core/material/dialogs/MaterialDialogModule';
+import {NameModule} from '../common/forms/attributeInput/CFAttrTypeSelectModule';
 
 const components = [
     PostListComponent,
@@ -23,7 +24,8 @@ const components = [
         MaterialModules,
         ListTableModule,
         GeneralPageModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NameModule
     ],
     exports: [],
     entryComponents: [

@@ -5,5 +5,6 @@ export interface Thing {
     id?: number;
     name?: string;
     type?: ThingType;
+    isInitial?: boolean;
     attributes?: ThingAttribute[];
 }

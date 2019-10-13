@@ -1,5 +1,6 @@
 export interface GeneralTableColumn {
     columnName: string;
+    columnKeySuffix?: string;
     columnKey: string;
     isDate?: boolean;
     dateFormat?: string;

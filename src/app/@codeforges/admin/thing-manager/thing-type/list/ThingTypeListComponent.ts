@@ -2,12 +2,9 @@ import {Component} from '@angular/core';
 import {GeneralTableColumn} from '../../../../core/material/tables/dataModels/GeneralTableColumn';
 import {MatDialog} from '@angular/material';
 import {GeneralListComponent} from '../../../common/components/GeneralListComponent';
-import {ThingAttribute} from '../../../common/api/thing/dto/ThingAttribute';
-import {ThingAttributeService} from '../../../common/api/thing/services/ThingAttributeService';
 import {CreateThingTypeDialogComponent} from '../dialogs/CreateThingTypeDialogComponent';
 import {ThingType} from '../../../common/api/thing/dto/ThingType';
 import {ThingTypeService} from '../../../common/api/thing/services/ThingTypeService';
-import {Thing} from '../../../common/api/thing/dto/Thing';
 
 @Component({
     selector: 'cf-thing-type-list',

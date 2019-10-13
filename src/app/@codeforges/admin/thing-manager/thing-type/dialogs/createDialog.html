@@ -38,15 +38,19 @@
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            <mat-form-field class="w-50 pr-2">
-                <input formControlName="type" placeholder="Type" matInput required>
-                <button mat-icon-button
-                        matSuffix
-                        (click)="removeAttribute(i)"
-                        matTooltip="Remove attribute">
-                    <mat-icon>remove_circle_outline</mat-icon>
-                </button>
-            </mat-form-field>
+            <cf-attr-select [attributeType]="item.get('type')?.value"
+                            [fullWidth]="false"
+                            (attributeTypesChange)="item.get('type').setValue($event)">
+            </cf-attr-select>
+            <!--            <mat-form-field class="w-50 pr-2">-->
+            <!--                <input formControlName="type" placeholder="Type" matInput required>-->
+            <!--                <button mat-icon-button-->
+            <!--                        matSuffix-->
+            <!--                        (click)="removeAttribute(i)"-->
+            <!--                        matTooltip="Remove attribute">-->
+            <!--                    <mat-icon>remove_circle_outline</mat-icon>-->
+            <!--                </button>-->
+            <!--            </mat-form-field>-->
         </div>
     </div>
 </form>
