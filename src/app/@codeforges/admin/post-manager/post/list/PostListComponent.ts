@@ -5,6 +5,7 @@ import {Thing} from '../../../common/api/thing/dto/Thing';
 import {MatDialog} from '@angular/material';
 import {GeneralListComponent} from '../../../common/components/GeneralListComponent';
 import {CreatePostDialogComponent} from '../dialogs/CreatePostDialogComponent';
+import {ThingTypeService} from '../../../common/api/thing/services/ThingTypeService';
 
 @Component({
     selector: 'cf-thing-list',
@@ -20,8 +21,8 @@ export class PostListComponent extends GeneralListComponent<Thing> {
             columnKeySuffix: '-title',
             columnName: 'Title',
             findBy: {
-                predicate: (element => element.key === 'title'),
-                path: 'value'
+                predicate: element => element.key === 'title',
+                path: 'value.value'
             },
             truncateSize: 50
         },
@@ -30,16 +31,17 @@ export class PostListComponent extends GeneralListComponent<Thing> {
             columnKeySuffix: '-content',
             columnName: 'Content',
             findBy: {
-                predicate: (element => {
+                predicate: element => {
                     return element.key === 'content';
-                }),
-                path: 'value'
+                },
+                path: 'value.value'
             },
             truncateSize: 50
         },
     ];
 
-    constructor(thingService: ThingService,
+    constructor(private thingTypeService: ThingTypeService,
+                thingService: ThingService,
                 matDialog: MatDialog) {
         super(thingService,
             matDialog,
@@ -58,7 +60,8 @@ export class PostListComponent extends GeneralListComponent<Thing> {
     }
 
     openCreateDialog(item?: Thing) {
-        this.create(CreatePostDialogComponent, item);
+        this.thingTypeService.getType('post')
+            .subscribe(type => this.create(CreatePostDialogComponent, item, type));
     }
 
 }

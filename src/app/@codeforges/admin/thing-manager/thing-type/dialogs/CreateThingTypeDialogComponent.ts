@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ThingAttributeService} from '../../../common/api/thing/services/ThingAttributeService';
-import {ThingAttribute} from '../../../common/api/thing/dto/ThingAttribute';
+import {ThingTypeAttribute} from '../../../common/api/thing/dto/ThingTypeAttribute';
 import * as _ from 'lodash';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {finalize} from 'rxjs/operators';
@@ -17,7 +17,7 @@ import {ThingTypeService} from '../../../common/api/thing/services/ThingTypeServ
 
 export class CreateThingTypeDialogComponent implements OnInit {
     public formGroup: FormGroup;
-    public availableAttributeStream: Observable<ThingAttribute[]>;
+    public availableAttributeStream: Observable<ThingTypeAttribute[]>;
     public attributes: FormArray;
     public isLoading = false;
 
@@ -32,7 +32,6 @@ export class CreateThingTypeDialogComponent implements OnInit {
         this.availableAttributeStream = this.thingAttributeService
             .getMany({select: ['id', 'key', 'type']});
         this.buildForm();
-        console.log(this.formGroup);
     }
 
 
@@ -65,13 +64,13 @@ export class CreateThingTypeDialogComponent implements OnInit {
         this.attributes.removeAt(index);
     }
 
-    public onAttributeSelected(selectedAttribute: ThingAttribute, controlIndex) {
+    public onAttributeSelected(selectedAttribute: ThingTypeAttribute, controlIndex) {
         const attribute = (this.formGroup.get('attributes') as FormArray).at(controlIndex);
         attribute.get('type').setValue(selectedAttribute.type);
         attribute.get('id').setValue(selectedAttribute.id);
     }
 
-    private createAttributeFormGroup(attribute?: ThingAttribute): FormGroup {
+    private createAttributeFormGroup(attribute?: ThingTypeAttribute): FormGroup {
         return this.fb.group({
             id: _.get(attribute, 'id') || '',
             key: [_.get(attribute, 'key') || '', Validators.required],

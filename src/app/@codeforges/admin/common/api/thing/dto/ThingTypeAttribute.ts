@@ -1,10 +1,11 @@
 import {Thing} from './Thing';
 import {ThingAttributeValue} from './ThingAttributeValue';
+import {AttributeTypes} from './AttributeTypes';
 
-export interface ThingAttribute {
+export interface ThingTypeAttribute {
     id?: number;
     key: string;
     value: ThingAttributeValue;
-    type: string;
+    type: AttributeTypes;
     things: Thing[];
 }

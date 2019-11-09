@@ -1,10 +1,10 @@
 import {Thing} from './Thing';
-import {ThingAttribute} from './ThingAttribute';
+import {ThingTypeAttribute} from './ThingTypeAttribute';
 
 export interface ThingType {
     id?: number;
     name: string;
     icon?: string;
     things?: Thing[];
-    attributes?: ThingAttribute[];
+    attributes?: ThingTypeAttribute[];
 }

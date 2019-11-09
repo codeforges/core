@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {GeneralTableColumn} from '../../../../core/material/tables/dataModels/GeneralTableColumn';
 import {MatDialog} from '@angular/material';
 import {GeneralListComponent} from '../../../common/components/GeneralListComponent';
-import {ThingAttribute} from '../../../common/api/thing/dto/ThingAttribute';
+import {ThingTypeAttribute} from '../../../common/api/thing/dto/ThingTypeAttribute';
 import {ThingAttributeService} from '../../../common/api/thing/services/ThingAttributeService';
 import {CreateAttributeDialogComponent} from '../dialogs/CreateAttributeDialogComponent';
 
@@ -11,7 +11,7 @@ import {CreateAttributeDialogComponent} from '../dialogs/CreateAttributeDialogCo
     templateUrl: 'attributeList.html'
 })
 
-export class AttributeListComponent extends GeneralListComponent<ThingAttribute> {
+export class AttributeListComponent extends GeneralListComponent<ThingTypeAttribute> {
 
     public displayedColumns: GeneralTableColumn[] = [
         {columnKey: 'id', columnName: 'ID'},
@@ -23,11 +23,11 @@ export class AttributeListComponent extends GeneralListComponent<ThingAttribute>
         super(attributeService, matDialog);
     }
 
-    deleteItem(item: ThingAttribute) {
+    deleteItem(item: ThingTypeAttribute) {
         this.delete(item);
     }
 
-    openCreateDialog(item?: ThingAttribute) {
+    openCreateDialog(item?: ThingTypeAttribute) {
         this.create(CreateAttributeDialogComponent, item);
     }
 }

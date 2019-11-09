@@ -12,40 +12,6 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <div class="row d-flex align-items-center">
-        <div class="col-6">
-            <h4>Attributes</h4>
-        </div>
-        <div class="col-6 justify-content-end d-flex">
-            <button mat-icon-button (click)="addAttribute()" matTooltip="Add attribute">
-                <mat-icon>add_circle_outline</mat-icon>
-            </button>
-        </div>
-    </div>
-    <div formArrayName="attributes"
-         *ngFor="let item of createThingForm.get('attributes').controls; let i = index;">
-        <div [formGroupName]="i">
-            <mat-form-field class="w-50 pr-2">
-                <input formControlName="key" placeholder="Key" matInput [matAutocomplete]="auto" required>
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of availableAttributeStream | async"
-                                (click)="onAttributeSelected(option, i)"
-                                [value]="option.key">
-                        {{option.key}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <mat-form-field class="w-50 pr-2">
-                <input formControlName="type" placeholder="Type" matInput required>
-                <button mat-icon-button
-                        matSuffix
-                        (click)="removeAttribute(i)"
-                        matTooltip="Remove attribute">
-                    <mat-icon>remove_circle_outline</mat-icon>
-                </button>
-            </mat-form-field>
-        </div>
-    </div>
 </form>
 <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 <mat-dialog-actions>

@@ -1,15 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {ThingService} from '../../../common/api/thing/services/ThingService';
-import {ThingTypeService} from '../../../common/api/thing/services/ThingTypeService';
-import {Observable} from 'rxjs';
-import {ThingType} from '../../../common/api/thing/dto/ThingType';
-import {ThingAttributeService} from '../../../common/api/thing/services/ThingAttributeService';
-import {ThingAttribute} from '../../../common/api/thing/dto/ThingAttribute';
 import * as _ from 'lodash';
 import {Thing} from '../../../common/api/thing/dto/Thing';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {finalize} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {ThingType} from '../../../common/api/thing/dto/ThingType';
+import {ThingTypeService} from '../../../common/api/thing/services/ThingTypeService';
+import {ThingTypeAttribute} from '../../../common/api/thing/dto/ThingTypeAttribute';
 
 @Component({
     selector: 'app-create-thing-dialog',
@@ -18,65 +17,69 @@ import {finalize} from 'rxjs/operators';
 
 export class CreatePostDialogComponent implements OnInit {
     public createThingForm: FormGroup;
-    public availableThingTypesStream: Observable<ThingType[]>;
-    public availableAttributeStream: Observable<ThingAttribute[]>;
     public attributes: FormArray;
     public isLoading = false;
+    public attributesStream: Observable<ThingTypeAttribute[]>;
+    private availableAttributes: ThingTypeAttribute[];
 
     constructor(private fb: FormBuilder,
-                @Inject(MAT_DIALOG_DATA) public data: { item: Thing },
+                @Inject(MAT_DIALOG_DATA) public data: { additionalData: ThingType, item?: Thing },
                 private thingService: ThingService,
-                private dialogRef: MatDialogRef<CreatePostDialogComponent>,
-                private thingAttributeService: ThingAttributeService,
-                private thingTypeService: ThingTypeService) {
+                private thingTypeService: ThingTypeService,
+                private dialogRef: MatDialogRef<CreatePostDialogComponent>) {
     }
 
     ngOnInit() {
-        this.availableThingTypesStream = this.thingTypeService.getMany();
-        this.availableAttributeStream = this.thingAttributeService
-            .getMany({select: ['id', 'key', 'type']});
-
         this.buildForm();
     }
 
 
     public submit() {
+
         if (this.createThingForm.valid) {
             this.isLoading = true;
-            const payload = this.createThingForm.getRawValue() as Thing;
-
-            payload.attributes = _.map(payload.attributes, (attr) => {
-                if (!attr.id) {
-                    attr = _.omit(attr, 'id');
-                }
+            let payload = this.createThingForm.getRawValue();
+            const attributeValues = _.map(payload.attributes, (attr) => {
+                attr.value = {
+                    value: attr.value,
+                    id: 3
+                };
                 return attr;
             });
+            payload.type.attributes = attributeValues;
+            payload = _.omit(payload, 'attributes');
 
-            _.set(payload, 'type.id', _.get(payload, 'type'));
-
+            if (!this.data.item) {
+                payload = _.omit(payload, 'id');
+            }
+            console.log(payload);
             this.createOrUpdate(payload);
         }
     }
 
-    private createAttributeFormGroup(attribute?: ThingAttribute): FormGroup {
-        return this.fb.group({
-            id: _.get(attribute, 'id') || '',
-            key: [_.get(attribute, 'key') || '', Validators.required],
-            type: [_.get(attribute, 'type') || '', Validators.required]
-        });
-    }
-
     private buildForm() {
-        const attributes = this.data.item ?
-            _.map(this.data.item.attributes, (attr) => this.createAttributeFormGroup(attr)) : [];
+        console.log(this.data);
+        this.availableAttributes =
+            _.get(this.data, 'item.type.attributes') || this.data.additionalData.attributes;
+        const attributeFormGroup =
+            _.map(this.availableAttributes, attr => this.createAttributeFormGroup(attr));
         this.createThingForm = this.fb.group(
             {
-                name: [_.get(this.data, 'item.name') || '', Validators.required],
-                type: [_.get(this.data, 'item.type.id') || '', Validators.required],
-                attributes: this.fb.array(attributes)
+                id: [_.get(this.data, 'item.id') || null],
+                name: [_.get(this.data, 'item.name') || ''],
+                type: [_.get(this.data, 'item.type') || this.data.additionalData],
+                attributes: this.fb.array(attributeFormGroup)
             }
         );
-        this.attributes = this.createThingForm.get('attributes') as FormArray;
+    }
+
+    private createAttributeFormGroup(attribute?: ThingTypeAttribute): FormGroup {
+        return this.fb.group({
+            id: _.get(attribute, 'id') || '',
+            key: [_.get(attribute, 'key') || ''],
+            type: [_.get(attribute, 'type') || ''],
+            value: [_.get(attribute, 'value') || '']
+        });
     }
 
     private createOrUpdate(payload: Thing) {

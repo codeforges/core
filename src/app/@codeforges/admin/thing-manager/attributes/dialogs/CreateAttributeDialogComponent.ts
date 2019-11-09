@@ -1,13 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ThingService} from '../../../common/api/thing/services/ThingService';
-import {ThingTypeService} from '../../../common/api/thing/services/ThingTypeService';
-import {Observable} from 'rxjs';
-import {ThingType} from '../../../common/api/thing/dto/ThingType';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ThingAttributeService} from '../../../common/api/thing/services/ThingAttributeService';
-import {ThingAttribute} from '../../../common/api/thing/dto/ThingAttribute';
+import {ThingTypeAttribute} from '../../../common/api/thing/dto/ThingTypeAttribute';
 import * as _ from 'lodash';
-import {Thing} from '../../../common/api/thing/dto/Thing';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {finalize} from 'rxjs/operators';
 
@@ -21,7 +16,7 @@ export class CreateAttributeDialogComponent implements OnInit {
     public isLoading = false;
 
     constructor(private fb: FormBuilder,
-                @Inject(MAT_DIALOG_DATA) public data: { item: ThingAttribute },
+                @Inject(MAT_DIALOG_DATA) public data: { item: ThingTypeAttribute },
                 private attributeService: ThingAttributeService,
                 private dialogRef: MatDialogRef<CreateAttributeDialogComponent>) {
     }
@@ -34,7 +29,7 @@ export class CreateAttributeDialogComponent implements OnInit {
     public submit() {
         if (this.formGroup.valid) {
             this.isLoading = true;
-            const payload = this.formGroup.getRawValue() as ThingAttribute;
+            const payload = this.formGroup.getRawValue() as ThingTypeAttribute;
             this.createOrUpdate(payload);
         }
     }
@@ -48,7 +43,7 @@ export class CreateAttributeDialogComponent implements OnInit {
         );
     }
 
-    private createOrUpdate(payload: ThingAttribute) {
+    private createOrUpdate(payload: ThingTypeAttribute) {
         const createOrUpdateStream = this.data.item ?
             this.attributeService.update(this.data.item.id, payload) : this.attributeService.create(payload);
 

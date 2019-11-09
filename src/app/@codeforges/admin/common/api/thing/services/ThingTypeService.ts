@@ -4,6 +4,9 @@ import {CrudQueryParams} from '../../../../../nestjsx/crud/CrudQueryParams';
 import {Observable} from 'rxjs';
 import {ThingType} from '../dto/ThingType';
 import {ThingTypeResource} from '../resources/ThingTypeResource';
+import {ThingTypeAttribute} from '../dto/ThingTypeAttribute';
+import {map} from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ThingTypeService implements CrudAware<ThingType> {
@@ -33,5 +36,24 @@ export class ThingTypeService implements CrudAware<ThingType> {
 
     update<K>(id: string | number, payload: K, query?: CrudQueryParams): Observable<ThingType> {
         return this.resource.update(id, payload, query);
+    }
+
+    public getAttributesForType(typeName: string): Observable<ThingTypeAttribute[]> {
+        return this.getMany({
+            filters: [
+                {field: 'name', operator: 'eq', value: typeName},
+            ],
+            select: ['attributes']
+        })
+            .pipe(map((res: ThingType[]) => _.head(res).attributes));
+    }
+
+    public getType(typeName: string): Observable<ThingType> {
+        return this.getMany({
+            filters: [
+                {field: 'name', operator: 'eq', value: typeName},
+            ],
+        })
+            .pipe(map((res: ThingType[]) => _.head(res)));
     }
 }

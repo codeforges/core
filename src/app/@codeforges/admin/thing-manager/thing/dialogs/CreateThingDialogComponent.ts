@@ -5,7 +5,7 @@ import {ThingTypeService} from '../../../common/api/thing/services/ThingTypeServ
 import {Observable} from 'rxjs';
 import {ThingType} from '../../../common/api/thing/dto/ThingType';
 import {ThingAttributeService} from '../../../common/api/thing/services/ThingAttributeService';
-import {ThingAttribute} from '../../../common/api/thing/dto/ThingAttribute';
+import {ThingTypeAttribute} from '../../../common/api/thing/dto/ThingTypeAttribute';
 import * as _ from 'lodash';
 import {Thing} from '../../../common/api/thing/dto/Thing';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
@@ -19,7 +19,7 @@ import {finalize} from 'rxjs/operators';
 export class CreateThingDialogComponent implements OnInit {
     public createThingForm: FormGroup;
     public availableThingTypesStream: Observable<ThingType[]>;
-    public availableAttributeStream: Observable<ThingAttribute[]>;
+    public availableAttributeStream: Observable<ThingTypeAttribute[]>;
     public attributes: FormArray;
     public isLoading = false;
 
@@ -45,52 +45,21 @@ export class CreateThingDialogComponent implements OnInit {
             this.isLoading = true;
             const payload = this.createThingForm.getRawValue() as Thing;
 
-            payload.attributes = _.map(payload.attributes, (attr) => {
-                if (!attr.id) {
-                    attr = _.omit(attr, 'id');
-                }
-                return attr;
-            });
-
             _.set(payload, 'type.id', _.get(payload, 'type'));
 
             this.createOrUpdate(payload);
         }
     }
 
-    public addAttribute() {
-        this.attributes.push(this.createAttributeFormGroup());
-    }
-
-    public removeAttribute(index: number) {
-        this.attributes.removeAt(index);
-    }
-
-    public onAttributeSelected(selectedAttribute: ThingAttribute, controlIndex) {
-        const attribute = (this.createThingForm.get('attributes') as FormArray).at(controlIndex);
-        attribute.get('type').setValue(selectedAttribute.type);
-        attribute.get('id').setValue(selectedAttribute.id);
-    }
-
-    private createAttributeFormGroup(attribute?: ThingAttribute): FormGroup {
-        return this.fb.group({
-            id: _.get(attribute, 'id') || '',
-            key: [_.get(attribute, 'key') || '', Validators.required],
-            type: [_.get(attribute, 'type') || '', Validators.required]
-        });
-    }
 
     private buildForm() {
-        const attributes = this.data.item ?
-            _.map(this.data.item.attributes, (attr) => this.createAttributeFormGroup(attr)) : [];
         this.createThingForm = this.fb.group(
             {
                 name: [_.get(this.data, 'item.name') || '', Validators.required],
                 type: [_.get(this.data, 'item.type.id') || '', Validators.required],
-                attributes: this.fb.array(attributes)
             }
         );
-        this.attributes = this.createThingForm.get('attributes') as FormArray;
+        this.attributes = null;
     }
 
     private createOrUpdate(payload: Thing) {

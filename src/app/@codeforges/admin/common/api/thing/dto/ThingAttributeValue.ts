@@ -1,7 +1,7 @@
-import {ThingAttribute} from './ThingAttribute';
+import {ThingTypeAttribute} from './ThingTypeAttribute';
 
 export interface ThingAttributeValue {
     id: string;
     value: string;
-    attributes: ThingAttribute[];
+    attributes: ThingTypeAttribute[];
 }
