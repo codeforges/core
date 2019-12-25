@@ -4,7 +4,7 @@ import {OnInit} from '@angular/core';
 import {CrudAware} from '../../../nestjsx/crud/CrudAware';
 import {QueryFields} from '@nestjsx/crud-request';
 import {ComponentType} from '@angular/cdk/portal';
-import {finalize, switchMap} from 'rxjs/operators';
+import {finalize, map, switchMap} from 'rxjs/operators';
 import {ConfirmationDialogComponent} from '../../../core/material/dialogs/confirmation/ConfirmationDialogComponent';
 import {CrudQueryParams} from '../../../nestjsx/crud/CrudQueryParams';
 import * as _ from 'lodash';
@@ -59,6 +59,7 @@ export abstract class GeneralListComponent<T> implements OnInit {
 
     private updateListStream() {
         const options = this.queryFields ? {select: this.queryFields} : null;
-        this.listStream = this.service.getMany(_.merge(options, this.query));
+        this.listStream = this.service.getMany(_.merge(options, this.query))
+            .pipe(map((res) => res.data));
     }
 }

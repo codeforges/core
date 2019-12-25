@@ -4,7 +4,7 @@ import {ThingAttributeService} from '../../../common/api/thing/services/ThingAtt
 import {ThingTypeAttribute} from '../../../common/api/thing/dto/ThingTypeAttribute';
 import * as _ from 'lodash';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {finalize} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import {Thing} from '../../../common/api/thing/dto/Thing';
 import {Observable} from 'rxjs';
 import {ThingType} from '../../../common/api/thing/dto/ThingType';
@@ -30,7 +30,9 @@ export class CreateThingTypeDialogComponent implements OnInit {
 
     ngOnInit() {
         this.availableAttributeStream = this.thingAttributeService
-            .getMany({select: ['id', 'key', 'type']});
+            .getMany({select: ['id', 'key', 'type']})
+            .pipe(map((res) => res.data));
+
         this.buildForm();
     }
 

@@ -9,7 +9,7 @@ import {ThingTypeAttribute} from '../../../common/api/thing/dto/ThingTypeAttribu
 import * as _ from 'lodash';
 import {Thing} from '../../../common/api/thing/dto/Thing';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {finalize} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-create-thing-dialog',
@@ -32,9 +32,11 @@ export class CreateThingDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.availableThingTypesStream = this.thingTypeService.getMany();
+        this.availableThingTypesStream = this.thingTypeService.getMany()
+            .pipe(map((res) => res.data));
         this.availableAttributeStream = this.thingAttributeService
-            .getMany({select: ['id', 'key', 'type']});
+            .getMany({select: ['id', 'key', 'type']})
+            .pipe(map((res) => res.data));
 
         this.buildForm();
     }

@@ -6,6 +6,7 @@ import {ThingType} from '../../common/api/thing/dto/ThingType';
 import {SideMenuNavItem} from '../menu-item/SideMenuNavItem';
 import {map} from 'rxjs/operators';
 import * as _ from 'lodash';
+import {CrudPageable} from '../../../core/material/tables/dataModels/Pageable';
 
 @Component({
     selector: 'cf-dynamic-side-nav-list',
@@ -22,8 +23,8 @@ export class DynamicSideNavListComponent extends StaticSideNavListComponent impl
     ngOnInit() {
         this.navItemsStream = this.typeService.getMany()
             .pipe(
-                map((res: ThingType[]) => {
-                    return _.map(res, (type) => {
+                map((res: CrudPageable<ThingType>) => {
+                    return _.map(res.data, (type) => {
                         return {
                             displayName: _.capitalize(type.name) + ' Manager',
                             route: _.lowerCase(type.name) + '/list',

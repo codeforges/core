@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {CrudQueryParams} from './CrudQueryParams';
 import {CrudQueryStringBuilder} from './CrudQueryStringFactory';
+import {CrudPageable} from '../../core/material/tables/dataModels/Pageable';
 
 export class CrudResource<T> implements CrudAware<T> {
 
@@ -26,8 +27,8 @@ export class CrudResource<T> implements CrudAware<T> {
         return this.httpClient.get<T>(`${this.URL}/${id}${CrudQueryStringBuilder.build(query)}`);
     }
 
-    getMany(query?: CrudQueryParams): Observable<T[]> {
-        return this.httpClient.get<T[]>(`${this.URL}${CrudQueryStringBuilder.build(query)}`);
+    getMany(query?: CrudQueryParams): Observable<CrudPageable<T>> {
+        return this.httpClient.get<CrudPageable<T>>(`${this.URL}${CrudQueryStringBuilder.build(query)}`);
     }
 
     update<K>(id: string | number, payload: K, query?: CrudQueryParams): Observable<T> {

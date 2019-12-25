@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {CrudQueryParams} from '../../../../../nestjsx/crud/CrudQueryParams';
 import {ThingTypeAttribute} from '../dto/ThingTypeAttribute';
 import {ThingAttributeResource} from '../resources/ThingAttributeResource';
+import {CrudPageable} from '../../../../../core/material/tables/dataModels/Pageable';
 
 @Injectable()
 export class ThingAttributeService implements CrudAware<ThingTypeAttribute> {
@@ -27,7 +28,7 @@ export class ThingAttributeService implements CrudAware<ThingTypeAttribute> {
         return this.resource.get(id, query);
     }
 
-    getMany(query?: CrudQueryParams): Observable<ThingTypeAttribute[]> {
+    getMany(query?: CrudQueryParams): Observable<CrudPageable<ThingTypeAttribute>> {
         return this.resource.getMany(query);
     }
 

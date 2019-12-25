@@ -7,6 +7,7 @@ import {ThingTypeResource} from '../resources/ThingTypeResource';
 import {ThingTypeAttribute} from '../dto/ThingTypeAttribute';
 import {map} from 'rxjs/operators';
 import * as _ from 'lodash';
+import {CrudPageable} from '../../../../../core/material/tables/dataModels/Pageable';
 
 @Injectable()
 export class ThingTypeService implements CrudAware<ThingType> {
@@ -30,7 +31,7 @@ export class ThingTypeService implements CrudAware<ThingType> {
         return this.resource.get(id, query);
     }
 
-    getMany(query?: CrudQueryParams): Observable<ThingType[]> {
+    getMany(query?: CrudQueryParams): Observable<CrudPageable<ThingType>> {
         return this.resource.getMany(query);
     }
 
@@ -45,7 +46,7 @@ export class ThingTypeService implements CrudAware<ThingType> {
             ],
             select: ['attributes']
         })
-            .pipe(map((res: ThingType[]) => _.head(res).attributes));
+            .pipe(map((res: CrudPageable<ThingType>) => _.head(res.data).attributes));
     }
 
     public getType(typeName: string): Observable<ThingType> {
@@ -54,6 +55,6 @@ export class ThingTypeService implements CrudAware<ThingType> {
                 {field: 'name', operator: 'eq', value: typeName},
             ],
         })
-            .pipe(map((res: ThingType[]) => _.head(res)));
+            .pipe(map((res: CrudPageable<ThingType>) => _.head(res.data)));
     }
 }
