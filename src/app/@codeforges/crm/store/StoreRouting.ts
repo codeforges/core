@@ -8,7 +8,6 @@ export const StoreRouting: Route[] = [
             {path: 'list', component: StoreListComponent},
             {path: 'details/:id', component: StoreDetailsComponent},
             {path: 'details/test', component: StoreDetailsComponent},
-            {path: '', redirectTo: 'list'}
         ],
     }
 ];

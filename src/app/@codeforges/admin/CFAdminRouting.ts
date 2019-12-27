@@ -9,10 +9,11 @@ export const CFAdminRouting: Route[] = [
                 component: CFAdminComponent,
                 children: [
                     {path: 'things', loadChildren: './thing-manager/ThingManagerModule#ThingManagerModule'},
-                    {path: 'post', loadChildren: './post-manager/PostManagerModule#PostManagerModule'}
+                    {path: 'post', loadChildren: './post-manager/PostManagerModule#PostManagerModule'},
+                    {path: 'crm', loadChildren: '../crm/store/StoreModule#StoreModule'},
                 ]
             },
-            {path: '', redirectTo: 'admin'}
+            {path: '', redirectTo: 'crm'}
         ]
     }
 ];

@@ -14,6 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        console.log(req);
         if (this.isAssetsRequest(req)) {
             return next.handle(req);
         }
@@ -24,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
             authorizedRequest = req.clone({
                 headers: req.headers.set(
                     'Authorization',
-                    `Bearer ${this.authService.loadToken()}`
+                    `Bearer ${this.authService.loadToken().token}`
                 )
             });
         }

@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
 import {StoreApiModule} from './store/StoreApiModule';
 
 const modules = [
@@ -8,7 +7,6 @@ const modules = [
 
 @NgModule({
     imports: [
-        HttpClientModule,
         ...modules
     ],
     exports: modules
