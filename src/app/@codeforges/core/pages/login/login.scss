@@ -1,0 +1,10 @@
+::ng-deep {
+    @import "../../../scss/material";
+    @import "~bootstrap/scss/bootstrap-grid";
+    @import "~bootstrap/scss/utilities/sizing";
+}
+
+.container-fluid {
+    height: 100vh;
+    background-color: #f1f1f1;
+}
