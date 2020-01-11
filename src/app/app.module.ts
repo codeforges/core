@@ -10,7 +10,7 @@ import {CFAuthModule} from './@codeforges/core/auth/CFAuthModule';
 
 const routes: Route[] = [
     {path: 'cf', loadChildren: './@codeforges/CodeforgesModule#CodeforgesModule'},
-    {path: '**', redirectTo: 'cf'}
+    {path: '**', redirectTo: 'cf', pathMatch: 'full'}
 ];
 
 @NgModule({

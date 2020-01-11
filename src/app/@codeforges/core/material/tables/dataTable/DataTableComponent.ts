@@ -57,15 +57,20 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     ngAfterViewInit(): void {
-        this.dataSource.sort = this.settings.inMemorySort ? this.sort : undefined;
-        this.sort.sortChange
-            .subscribe((event) => this.sortChange.emit(event));
+        if (this.dataSet) {
+            this.dataSource.sort = this.settings.inMemorySort ? this.sort : undefined;
+            this.sort.sortChange
+                .subscribe((event) => this.sortChange.emit(event));
+        }
+
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!_.isEmpty(this.dataSource)) {
             this.updateData();
             this.initColumns();
+        } else {
+            this.initSources();
         }
     }
 

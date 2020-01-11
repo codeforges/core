@@ -1,3 +1,12 @@
-<cf-list-table [dataSet]="parcels.data"
+<div class="row mt-3 mb-3">
+    <div class="col-6 d-flex align-items-center">Some desc</div>
+    <div class="col-6 d-flex align-items-center justify-content-end">
+        <button mat-flat-button color="primary" (click)="openCreateDialog()">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add New
+        </button>
+    </div>
+</div>
+<cf-list-table [dataSet]="parcels?.data"
                [displayedColumns]="displayColumns">
 </cf-list-table>

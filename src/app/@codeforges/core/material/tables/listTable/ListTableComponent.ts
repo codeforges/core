@@ -23,7 +23,7 @@ import * as _ from 'lodash';
 })
 
 export class ListTableComponent extends DataTableComponent implements OnInit, AfterViewInit {
-    @ContentChild(TemplateRef, { static: false }) actionMenuTemplate: TemplateRef<any>;
+    @ContentChild(TemplateRef, {static: false}) actionMenuTemplate: TemplateRef<any>;
     @Input() hasScroll = false;
     @Input() sortDirection = '';
     @Input() isSticky = false;
@@ -40,7 +40,9 @@ export class ListTableComponent extends DataTableComponent implements OnInit, Af
     }
 
     public getElementValue(element, column: GeneralTableColumn, canTruncate = true) {
-        let value = _.get(element, column.columnKey);
+        let value = _.isArray(column.columnKey) ?
+            _.join(_.compact(_.map(column.columnKey, (key) => _.get(element, key))), column.columnKeySeparator || ' ') :
+            _.get(element, column.columnKey);
         if (column.findBy) {
             value = _.get(_.find(value, column.findBy.predicate), column.findBy.path);
         }

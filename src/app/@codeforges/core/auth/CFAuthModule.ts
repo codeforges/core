@@ -3,10 +3,12 @@ import {AuthResource} from './resources/AuthResource';
 import {AuthService} from './services/AuthService';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './interceptors/AuthInterceptor';
+import {AuthGuard} from './guards/AuthGuard';
 
 const rootProviders = [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AuthResource,
+    AuthGuard,
     AuthService
 ];
 

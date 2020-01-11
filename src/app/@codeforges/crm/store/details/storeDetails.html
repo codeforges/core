@@ -1,2 +1,22 @@
-<h1>huj</h1>
-<app-parcel-list [parcels]="getParcelStream() | async"></app-parcel-list>
+<div class="container-fluid">
+    <div class="row"><h1>Storage Details</h1></div>
+    <div class="row">
+        <div class="col-12 mb-3">
+            <mat-card>
+                <mat-card-title>Parcels in store</mat-card-title>
+                <mat-card-content>
+                    <app-parcel-list [parcels]="getParcelStream() | async"></app-parcel-list>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-12 mb-3">
+            <mat-card>
+                <mat-card-title>Arriving in store</mat-card-title>
+                <mat-card-content>
+                    <app-parcel-list [parcels]="getParcelStream() | async"></app-parcel-list>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

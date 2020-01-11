@@ -156,7 +156,8 @@ export interface GeneralTableColumn {
 The General Table Column is configuration item for each column
 
 - `columnName` - The displayed name of the column
-- `columnKey` - the key of the collection object the value of which will be rendered
+- `columnKey` - the path or array of paths of the collection object the value of which will be rendered, Supports leveled path `(myProperty.someKey)`
+- `columnKeySeparator`  - if columnKey is array can be used as separator for the joined values;
 - `isDate` - if the value is a date , this flag will apply a pipe to render a date
 - `dateFormat` - customize date format , defaults to `short`, see formating here https://angular.io/api/common/DatePipe#pre-defined-format-options 
 - `timezone` - timezone see info here https://angular.io/api/common/DatePipe#pre-defined-format-options 

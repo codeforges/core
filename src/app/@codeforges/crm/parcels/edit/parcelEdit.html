@@ -1,0 +1,168 @@
+<h2 mat-dialog-title>Manage - Thing</h2>
+<div mat-dialog-content>
+    <form [formGroup]="parcelForm" mat-dialog-content autocomplete="off">
+        <h4>Destination: </h4>
+        <div class="row" formGroupName="destination">
+            <div class="col">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input name="address"
+                           formControlName="address"
+                           matInput
+                           required>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input name="city"
+                           formControlName="city"
+                           matInput
+                           required>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input name="country"
+                           formControlName="country"
+                           matInput
+                           required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="cf-separator"></div>
+        <h4>Sender</h4>
+        <div class="row" *ngIf="!isCreatingNewSender; else newSenderForm">
+            <div class="col">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input name="sender"
+                           formControlName="sender"
+                           matInput
+                           required>
+                    <button mat-icon-button matSuffix matTooltip="Create new Sender" (click)="createSender()">
+                        <mat-icon>person_add</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <ng-template #newSenderForm>
+            <div class="row" formGroupName="newSender">
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input name="firstName"
+                               formControlName="firstName"
+                               matInput
+                               required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input name="lastName"
+                               formControlName="lastName"
+                               matInput
+                               required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+
+
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input name="email"
+                               formControlName="email"
+                               matInput
+                               type="email"
+                               required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input name="phone"
+                               formControlName="phone"
+                               matInput
+                               type="number"
+                               required>
+                    </mat-form-field>
+                </div>
+            </div>
+        </ng-template>
+        <h4>Retriever</h4>
+        <div class="row" *ngIf="!isCreatingNewRetriever; else newRetrieverForm">
+            <div class="col">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input name="retriever"
+                           formControlName="retriever"
+                           matInput
+                           required>
+                    <button mat-icon-button matSuffix matTooltip="Create new Sender" (click)="createRetriever()">
+                        <mat-icon>person_add</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <ng-template #newRetrieverForm>
+            <div class="row" formGroupName="newRetriever">
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input name="firstName"
+                               formControlName="firstName"
+                               matInput
+                               required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input name="lastName"
+                               formControlName="lastName"
+                               matInput
+                               required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+
+
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input name="email"
+                               formControlName="email"
+                               matInput
+                               type="email"
+                               required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input name="phone"
+                               formControlName="phone"
+                               matInput
+                               type="number"
+                               required>
+                    </mat-form-field>
+                </div>
+            </div>
+        </ng-template>
+        <!--    <mat-form-field class="w-100">-->
+        <!--        <mat-label>Thing Type</mat-label>-->
+        <!--        <mat-select formControlName="type" required>-->
+        <!--            <mat-option *ngFor="let type of availableThingTypesStream | async" [value]="type.id">-->
+        <!--                {{type.name}}-->
+        <!--            </mat-option>-->
+        <!--        </mat-select>-->
+        <!--    </mat-form-field>-->
+    </form>
+</div>
+
+<!--<mat-dialog-actions>-->
+<!--    <button mat-button mat-dialog-close>Cancel</button>-->
+<!--    <button mat-button (click)="submit()" color="primary">Submit</button>-->
+<!--</mat-dialog-actions>-->
+

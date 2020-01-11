@@ -14,7 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log(req);
         if (this.isAssetsRequest(req)) {
             return next.handle(req);
         }

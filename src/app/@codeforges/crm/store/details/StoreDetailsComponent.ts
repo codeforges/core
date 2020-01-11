@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ParcelService} from '../../common/api/parcel/services/ParcelService';
 import {CrudPageable} from '../../../core/material/tables/dataModels/Pageable';
 import {Parcel} from '../../common/api/parcel/dto/Parcel';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
     selector: 'app-store-details',
@@ -12,7 +12,7 @@ import {Observable, Subject} from 'rxjs';
 })
 
 export class StoreDetailsComponent implements OnInit, OnDestroy {
-    private parcelSubject: Subject<CrudPageable<Parcel>> = new Subject();
+    private parcelSubject: BehaviorSubject<CrudPageable<Parcel>> = new BehaviorSubject(null);
 
     constructor(private route: ActivatedRoute,
                 private cdRef: ChangeDetectorRef,
