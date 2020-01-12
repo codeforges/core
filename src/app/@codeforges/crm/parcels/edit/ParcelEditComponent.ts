@@ -9,10 +9,18 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 
 export class ParcelEditComponent implements OnInit {
-
+    senders = [
+        {
+            id: '23',
+            phone: '+3235645345',
+            firstName: 'Ruben',
+            lastName: 'Mosesian'
+        }
+    ];
     public parcelForm: FormGroup;
     public isCreatingNewSender = false;
     public isCreatingNewRetriever = false;
+    public browserAutocompleteSalt = btoa(Math.random().toString(36));
 
     constructor(private fb: FormBuilder,
                 private cdRef: ChangeDetectorRef) {
@@ -26,8 +34,8 @@ export class ParcelEditComponent implements OnInit {
                     city: ['', Validators.required],
                     country: ['', Validators.required],
                 }),
-                sender: ['', Validators.required],
-                retriever: ['', Validators.required],
+                senderPhone: ['', Validators.required],
+                retrieverPhone: ['', Validators.required],
                 storage: ['', Validators.required]
             },
         );

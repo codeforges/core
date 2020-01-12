@@ -3,6 +3,7 @@ import {ParcelListComponent} from './list/ParcelListComponent';
 import {ListTableModule} from '../../core/material/tables/listTable/ListTableModule';
 import {ParcelEditComponent} from './edit/ParcelEditComponent';
 import {
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -33,7 +34,8 @@ const components = [
         MatButtonModule,
         MatIconModule,
         MatTooltipModule,
-        CommonModule
+        CommonModule,
+        MatAutocompleteModule
     ],
     exports: [
         ...components
